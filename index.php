@@ -1,49 +1,11 @@
 <?php
-class Movie
-{
-    public $title;
-    public $id;
-    public $genres;
-    public $description;
-    public $vote;
-
-    function __construct(String $title, int $id, array $genres, String $description, int $vote)
-    {
-        $this->title = $title;
-        $this->id = $id;
-        $this->genres = $genres;
-        $this->description = $description;
-        $this->vote = $vote;
-    }
-
-    function getTitle()
-    {
-        return $this->title;
-    }
-    function getId()
-    {
-        return $this->id;
-    }
-    function getGenres()
-    {
-        $generi = [];
-        for ($i = 0; $i < count($this->genres); $i++) {
-            $generi[] = $this->genres[$i];
-            echo $generi[$i] . ' , ';
-        };
-    }
-    function getDescription()
-    {
-        return $this->description;
-    }
-    function getVote()
-    {
-        return $this->vote;
-    }
+require_once './db.php';
+require_once 'models/Movie.php';
+$prefisso = 'movie';
+for ($i = 0; $i < count($movies); $i++) {
+    $nomeVariabile = $prefisso . strval($i);
+    $$nomeVariabile  = new Movie($movies[$i]);
 }
-
-$movie1 = new Movie('My little Pony', 15, ['Animazione', 'Commedia', 'Romantico'], 'Strano , ma veramente', 7);
-$movie2 = new Movie('Intestellar', 1, ['Fantascienza', 'Dramma', 'Sci-fi'], 'Bellissimo , ma veramente', 10);
 
 ?>
 
@@ -58,71 +20,43 @@ $movie2 = new Movie('Intestellar', 1, ['Fantascienza', 'Dramma', 'Sci-fi'], 'Bel
 
 <body>
     <h1>Lista Dei Film</h1>
-    <ul>
-        <li>
-            Title :
-            <?php
-            echo $movie1->getTitle();
-            ?>
-        </li>
-        <li>
-            ID :
-            <?php
-            echo $movie1->getId();
-            ?>
-        </li>
-        <li>
-            Genres :
-            <?php
-            echo $movie1->getGenres();
-            ?>
-        </li>
-        <li>
-            Description :
-            <?php
-            echo $movie1->getDescription();
-            ?>
-        </li>
-        <li>
-            Vote :
-            <?php
-            echo $movie1->getVote();
-            ?>
-        </li>
-    </ul>
+    <?php
+    for ($i = 0; $i < count($movies); $i++) { ?>
+        <?php $nomeVariabile = $prefisso . strval($i); ?>
+        <ul>
+            <li>
+                Title :
+                <?php
+                echo $$nomeVariabile->getTitle();
+                ?>
+            </li>
+            <li>
+                ID :
+                <?php
+                echo $$nomeVariabile->getId();
+                ?>
+            </li>
+            <li>
+                Genres :
+                <?php
+                echo $$nomeVariabile->getGenres();
+                ?>
+            </li>
+            <li>
+                Description :
+                <?php
+                echo $$nomeVariabile->getDescription();
+                ?>
+            </li>
+            <li>
+                Vote :
+                <?php
+                echo $$nomeVariabile->getVote();
+                ?>
+            </li>
+        </ul>
+    <?php } ?>
 
-    <ul>
-        <li>
-            Title :
-            <?php
-            echo $movie2->getTitle();
-            ?>
-        </li>
-        <li>
-            ID :
-            <?php
-            echo $movie2->getId();
-            ?>
-        </li>
-        <li>
-            Genres :
-            <?php
-            echo $movie2->getGenres();
-            ?>
-        </li>
-        <li>
-            Description :
-            <?php
-            echo $movie2->getDescription();
-            ?>
-        </li>
-        <li>
-            Vote :
-            <?php
-            echo $movie2->getVote();
-            ?>
-        </li>
-    </ul>
 </body>
 
 </html>
