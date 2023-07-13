@@ -7,7 +7,7 @@ class Movie
     public $description;
     public $vote;
 
-    function __construct(String $title, int $id, String $genres, String $description, int $vote)
+    function __construct(String $title, int $id, array $genres, String $description, int $vote)
     {
         $this->title = $title;
         $this->id = $id;
@@ -26,7 +26,11 @@ class Movie
     }
     function getGenres()
     {
-        return $this->genres;
+        $generi = [];
+        for ($i = 0; $i < count($this->genres); $i++) {
+            $generi[] = $this->genres[$i];
+            echo $generi[$i] . ' , ';
+        };
     }
     function getDescription()
     {
@@ -38,8 +42,8 @@ class Movie
     }
 }
 
-$movie1 = new Movie('My little Pony', 15, 'animazione', 'Strano , ma veramente', 7);
-$movie2 = new Movie('Intestellar', 1, 'Fantascienza', 'Bellissimo , ma veramente', 10);
+$movie1 = new Movie('My little Pony', 15, ['Animazione', 'Commedia', 'Romantico'], 'Strano , ma veramente', 7);
+$movie2 = new Movie('Intestellar', 1, ['Fantascienza', 'Dramma', 'Sci-fi'], 'Bellissimo , ma veramente', 10);
 
 ?>
 
